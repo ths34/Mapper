@@ -10,12 +10,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserImplementation implements UserService {
+public class UserServiceImplementation implements UserService {
+
+
 
     UserRepository theUserRepository;
 
     @Autowired
-    public UserImplementation(UserRepository userRepository){this.theUserRepository = userRepository;}
+    public UserServiceImplementation(UserRepository userRepository){this.theUserRepository = userRepository;}
 
     @Override
     public User save(User user) {
