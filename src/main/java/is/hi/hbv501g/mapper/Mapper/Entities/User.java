@@ -15,6 +15,7 @@ public class User {
     private String FirstName;
     private String LastName;
     private String UserName;
+    private String PassWord;
 
     public User() {
 
@@ -24,10 +25,11 @@ public class User {
         return FirstName;
     }
 
-    public User(String firstName, String lastName, String userName) {
+    public User(String firstName, String lastName, String userName, String passWord) {
         FirstName = firstName;
         LastName = lastName;
         UserName = userName;
+        PassWord = passWord;
     }
 
     public void setFirstName(String firstName) {
@@ -48,5 +50,13 @@ public class User {
 
     public void setUserName(String userName) {
         UserName = userName;
+    }
+
+    public String getPassWord() {
+        return PassWord;
+    }
+
+    public void setPassWord(String passWord) {
+        PassWord = passWord;
     }
 }
