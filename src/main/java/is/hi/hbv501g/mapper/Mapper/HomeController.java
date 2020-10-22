@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 public class HomeController {
@@ -48,8 +50,21 @@ public class HomeController {
         model.addAttribute("User",userService.findAllUsers());
         return "Home";
     }
-    @RequestMapping("login")
-    public String LoginPage() {
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String loginGET(User user){
         return "login";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String loginPOST(@Validated User user, BindingResult result, Model model, HttpSession session){
+        if(result.hasErrors()){
+            return "login";
+        }
+        User exists = userService.login(user);
+        if(exists != null){
+            session.setAttribute("LoggedInUser", user);
+            return "redirect:/";
+        }
+        return "redirect:/";
     }
 }

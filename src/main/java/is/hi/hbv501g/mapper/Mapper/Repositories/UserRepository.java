@@ -11,10 +11,22 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User save(User user);
-    void delete(User user);
-    List<User> findAllUsers();
-    List<User> findByName(String UserName);
-    Optional<User> findById(long id);
+
+    default void delete(User user) {
+
+    }
+
+    default List<User> findAllUsers() {
+        return null;
+    }
+
+    default User findByName(String UserName) {
+        return null;
+    }
+
+    default Optional<User> findById(long id) {
+        return null;
+    }
 
 }
 
