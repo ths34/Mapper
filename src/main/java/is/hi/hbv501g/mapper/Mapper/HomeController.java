@@ -62,6 +62,7 @@ public class HomeController {
         }
         User exists = userService.login(user);
         if(exists != null){
+            
             session.setAttribute("LoggedInUser", user);
             return "redirect:/";
         }
