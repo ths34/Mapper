@@ -1,23 +1,26 @@
 package is.hi.hbv501g.mapper.Mapper.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Image {
 
+    @ManyToOne  //athuga
     private Location imagelocation;
+
     private String imageTitle;
     private Date releaseDate;
     private String description;
-    private User owner; // á þetta vera userId??
+    @OneToOne //á þetta vera userId og á að hafa onetoonenotation?
+    private User owner;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+
+
     /*
     TODO
     Vantar tengingar við usertöflu og location

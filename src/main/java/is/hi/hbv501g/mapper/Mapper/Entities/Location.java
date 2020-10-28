@@ -1,9 +1,6 @@
 package is.hi.hbv501g.mapper.Mapper.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Location {
@@ -12,11 +9,17 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
+
     //TODO
     /*
-    Vantar tengingu one to one við Image
-
-
+    Vantar tengingu one to one við Image og User. Spurning hvrot eigi að vera. Væntanlega verður
+    tengt við location möguleikinn að user setji margar myndar frá staðsetningu og að margir user séu að
+    mynda sama location?? athuga í tíma á fimmtudag 30/10.
+    @OneToMany
+    private Image image;
+    @OneToMany
+    private User user;
      */
     private double Longitude;
     private double Latitude;
