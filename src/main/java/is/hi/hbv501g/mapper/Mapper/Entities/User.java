@@ -1,28 +1,27 @@
 package is.hi.hbv501g.mapper.Mapper.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long ID;
 
     private String FirstName;
     private String LastName;
     private String UserName;
     private String PassWord;
 
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
+    @OneToMany(mappedBy = "like", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> likes;
     public User() {
 
-    }
-
-    public String getFirstName() {
-        return FirstName;
     }
 
     public User(String firstName, String lastName, String userName, String passWord) {
@@ -30,6 +29,10 @@ public class User {
         LastName = lastName;
         UserName = userName;
         PassWord = passWord;
+
+    }
+    public String getFirstName() {
+        return FirstName;
     }
 
     public void setFirstName(String firstName) {
@@ -42,6 +45,10 @@ public class User {
 
     public void setLastName(String lastName) {
         LastName = lastName;
+    }
+
+    public long getId() {
+        return ID;
     }
 
     public String getUserName() {

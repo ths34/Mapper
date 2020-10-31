@@ -4,34 +4,31 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "image")
 public class Image {
-
-    @ManyToOne  //athuga
-    private Location imagelocation;
-
-    private String imageTitle;
-    private Date releaseDate;
-    private String description;
-    @OneToOne //á þetta vera userId og á að hafa onetoonenotation?
-    private User owner;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "locationID")
+    private Location locationID;
 
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    private User userID;
 
-    /*
-    TODO
-    Vantar tengingar við usertöflu og location
+    private String imageTitle;
+    private Date releaseDate;
+    private String description;
 
-     */
-    public Image(Location imagelocation, String imageTitle, Date releaseDate, String description, User owner) {
-        this.imagelocation = imagelocation;
+    public Image(Location location, String imageTitle, Date releaseDate, String description, User UserID) {
+        this.locationID = location;
         this.imageTitle = imageTitle;
         this.releaseDate = releaseDate;
         this.description = description;
-        this.owner = owner;
+        this.userID = UserID;
     }
 
     public Image() {
@@ -39,11 +36,11 @@ public class Image {
     }
 
     public Location getImagelocation() {
-        return imagelocation;
+        return locationID;
     }
 
     public void setImagelocation(Location imagelocation) {
-        this.imagelocation = imagelocation;
+        this.locationID = imagelocation;
     }
 
     public String getImageTitle() {
@@ -71,11 +68,11 @@ public class Image {
     }
 
     public User getOwner() {
-        return owner;
+        return userID;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwner(User UserID) {
+        this.userID = UserID;
     }
 
     public long getId() {

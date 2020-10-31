@@ -1,30 +1,21 @@
 package is.hi.hbv501g.mapper.Mapper.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "location")
 public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-
-
-    //TODO
-    /*
-    Vantar tengingu one to one við Image og User. Spurning hvrot eigi að vera. Væntanlega verður
-    tengt við location möguleikinn að user setji margar myndar frá staðsetningu og að margir user séu að
-    mynda sama location?? athuga í tíma á fimmtudag 30/10.
-    @OneToMany
-    private Image image;
-    @OneToMany
-    private User user;
-     */
     private double Longitude;
     private double Latitude;
     private String LocationName;
 
+    @OneToMany(mappedBy = "image", cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Image> images;
     public Location() {
 
     }
