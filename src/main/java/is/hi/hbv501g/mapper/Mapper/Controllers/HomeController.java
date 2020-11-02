@@ -1,4 +1,4 @@
-package is.hi.hbv501g.mapper.Mapper;
+package is.hi.hbv501g.mapper.Mapper.Controllers;
 
 import is.hi.hbv501g.mapper.Mapper.Entities.User;
 import is.hi.hbv501g.mapper.Mapper.Services.UserService;
