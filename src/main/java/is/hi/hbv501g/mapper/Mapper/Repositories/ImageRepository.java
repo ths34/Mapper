@@ -1,6 +1,8 @@
 package is.hi.hbv501g.mapper.Mapper.Repositories;
 
 import is.hi.hbv501g.mapper.Mapper.Entities.Image;
+import is.hi.hbv501g.mapper.Mapper.Entities.Location;
+import is.hi.hbv501g.mapper.Mapper.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -28,4 +30,5 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
         return null;
     }
 
+    List<Image> findByLocation(Location location);
 }

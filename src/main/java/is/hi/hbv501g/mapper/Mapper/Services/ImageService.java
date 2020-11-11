@@ -19,4 +19,8 @@ public interface ImageService {
     List<User> getLikes(Integer imageID);
     List<Comment> getComments(Integer imageID);
     Image findOne(Integer imageID);
+
+    List<Image> findAllByUser(long UserID);
+
+    Optional<Image> findById(long id);
 }
