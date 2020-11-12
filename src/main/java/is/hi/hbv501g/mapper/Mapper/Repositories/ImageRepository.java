@@ -30,5 +30,5 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
         return null;
     }
 
-    List<Image> findByLocation(Location location);
+   //List<Image> findByLocation(Location location); // ætti þetta ekki að vera í location repoinu???
 }

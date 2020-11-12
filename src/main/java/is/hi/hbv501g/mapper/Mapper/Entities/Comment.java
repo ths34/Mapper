@@ -25,6 +25,10 @@ public class Comment {
         this.createdOn = new Date();
     }
 
+    public Comment() {
+
+    }
+
     public Date getDate() {
         return createdOn;
     }

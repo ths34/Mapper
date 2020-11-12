@@ -1,6 +1,7 @@
 package is.hi.hbv501g.mapper.Mapper.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +15,8 @@ public class Location {
     private double Latitude;
     private String LocationName;
 
-    @OneToMany(mappedBy = "image", cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<Image> images;
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Image> images;// private List<Image> images = new ArrayList<>();??
     public Location() {
 
     }
