@@ -42,8 +42,8 @@ public class ImageServiceImplementation implements ImageService {
     }
 
     @Override
-    public List<Image> findByLocation(Location location) {
-        return null;// theImageRepository.findByLocation(location);
+    public List<Image> findByLocationID(Location location) {
+        return theImageRepository.findByLocationID(location);
     }
 
     @Override

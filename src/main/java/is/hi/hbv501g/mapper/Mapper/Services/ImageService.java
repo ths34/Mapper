@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ImageService {
     Image save(Image image);
     List<Image> findAllImages();
-    List<Image> findByLocation(Location location);
+    List<Image> findByLocationID(Location location);
     List<Image> findByUsername(String userName);
     void delete(Image image);
     List<User> getLikes(Integer imageID);
