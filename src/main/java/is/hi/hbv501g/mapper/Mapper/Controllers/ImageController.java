@@ -46,7 +46,15 @@ public class ImageController {
         image.setReleaseDate(testDate);
         image.setImagelocation(testloc);
 
-        System.out.println(image.getImageTitle() + image.getDescription() + image.getImagelocation().getLatitude() + image.getReleaseDate() + image.getOwner().getFirstName());
+        System.out.println(
+                image.getImageTitle() + " " +
+                image.getDescription() + " " +
+                image.getImagelocation().getLongitude() + " " +
+                image.getImagelocation().getLatitude() + " " +
+                image.getImagelocation().getLocationName() + " " +
+                image.getReleaseDate() + " " +
+                image.getOwner().getFirstName()
+        );
 
         Image savedImaged = imageService.save(image);
         String uploadDir = "user-photos/" + savedImaged.getId();

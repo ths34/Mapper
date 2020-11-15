@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "like")
+@Table(name = "likes")  // ath verður víst að vera likes sem table name like er reserved for mySQL. samkvæmt google :)
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
