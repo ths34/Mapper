@@ -30,6 +30,11 @@ public class ImageController {
     @Autowired
     private LocationService locationService;
 
+    @Autowired
+    public ImageController(UserService userService) {this.userService = userService;}
+    public ImageController(ImageService imageService) {this.imageService = imageService;}
+
+
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFilePOST(@ModelAttribute(name = "image") Image image, RedirectAttributes ra, @RequestParam("fileimage") MultipartFile multipartFile)
@@ -39,7 +44,8 @@ public class ImageController {
 
          */
         Location testloc = new Location(0.999,1.444,"prufa");
-        User testUser = new User("þorri", "Már", "ths34", "passw");
+        User testUser = userService.findByName("ths");
+        // User testUser = new User("þorri", "Már", "ths34", "passw");
         Date testDate = new Date();
 
 
@@ -59,14 +65,14 @@ public class ImageController {
                 image.getReleaseDate() + " " +
                 image.getOwner().getFirstName()
         );
-
+/*
         Image savedImaged = imageService.save(image);
         String uploadDir = "user-photos/" + savedImaged.getId();
         if (uploadDir != null) {
             System.out.println(uploadDir);
 
         }
-
+*/
         return "uploadFile";
     }
 
