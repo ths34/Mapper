@@ -38,16 +38,16 @@ public class ImageController {
         Gervigögntil að testa image upload
 
          */
-        Location testloc = new Location(0.999,1.444,"prufa");
-        User testUser = new User("þorri", "Már", "ths34", "passw");
-        Date testDate = new Date();
-
+        Location testloc = locationService.save(new Location(0.999,1.444,"prufa"));
+        System.out.println(testloc.getLatitude());
+        User testUser = userService.save(new User("þorri", "Már", "ths34", "passw"));
+        System.out.println(userService.findAllUsers());
 
         String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         image.setImageTitle(filename);
         image.setDescription("prufa");
         image.setOwner(testUser);
-        image.setReleaseDate(testDate);
+        image.setReleaseDate(new Date());
         image.setImagelocation(testloc);
 
         System.out.println(
@@ -62,11 +62,6 @@ public class ImageController {
 
         Image savedImaged = imageService.save(image);
         String uploadDir = "user-photos/" + savedImaged.getId();
-        if (uploadDir != null) {
-            System.out.println(uploadDir);
-
-        }
-
         return "uploadFile";
     }
 

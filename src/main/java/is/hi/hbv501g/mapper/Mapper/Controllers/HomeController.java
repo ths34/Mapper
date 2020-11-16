@@ -22,9 +22,11 @@ import java.io.IOException;
 
 @Controller
 public class HomeController {
-
+    @Autowired
     private UserService userService;
+    @Autowired
     private ImageService imageService;
+    @Autowired
     private LocationService locationService;
 
     @Autowired

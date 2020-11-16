@@ -2,6 +2,7 @@ package is.hi.hbv501g.mapper.Mapper.Repositories;
 
 import is.hi.hbv501g.mapper.Mapper.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     default void delete(User user) {
 
     }
-
+ //   @Query("SELECT * FROM User")
     default List<User> findAllUsers() {
         return null;
     }

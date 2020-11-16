@@ -19,14 +19,15 @@ public class Image {
     @JoinColumn(name = "userID")
     private User userID;
 
-    private String imageTitle;
+    @Temporal(TemporalType.DATE)
     private Date releaseDate;
+
+    private String imageTitle;
     private String description;
 
-    public Image(Location location, String imageTitle, Date releaseDate, String description, User UserID) {
+    public Image(Location location, String imageTitle, String description, User UserID) {
         this.locationID = location;
         this.imageTitle = imageTitle;
-        this.releaseDate = releaseDate;
         this.description = description;
         this.userID = UserID;
     }

@@ -7,5 +7,6 @@ import is.hi.hbv501g.mapper.Mapper.Entities.Location;
 import java.util.List;
 
 public interface LocationService {
-   // List<Image> findByLocation(Location location);
+    Location save(Location prufa);
+    // List<Image> findByLocation(Location location);
 }
