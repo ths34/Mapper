@@ -30,12 +30,6 @@ public class ImageController {
     @Autowired
     private LocationService locationService;
 
-    @Autowired
-    public ImageController(UserService userService) {this.userService = userService;}
-    public ImageController(ImageService imageService) {this.imageService = imageService;}
-
-
-
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFilePOST(@ModelAttribute(name = "image") Image image, RedirectAttributes ra, @RequestParam("fileimage") MultipartFile multipartFile)
             throws IOException {
@@ -64,7 +58,7 @@ public class ImageController {
                 image.getReleaseDate() + " " +
                 image.getOwner().getFirstName()
         );
-/*
+
         Image savedImaged = imageService.save(image);
         String uploadDir = "user-photos/" + savedImaged.getId();
         return "uploadFile";
