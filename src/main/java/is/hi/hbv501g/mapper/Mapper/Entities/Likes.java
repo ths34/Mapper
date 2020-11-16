@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "likes")  // ath verður víst að vera likes sem table name like er reserved for mySQL. samkvæmt google :)
-public class Like {
+public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -20,7 +20,7 @@ public class Like {
 
     private Date createdOn;
 
-    public Like() {
+    public Likes() {
         this.createdOn = new Date();
     }
 }

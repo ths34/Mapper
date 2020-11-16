@@ -1,29 +1,29 @@
 package is.hi.hbv501g.mapper.Mapper.Repositories;
 
 
-import is.hi.hbv501g.mapper.Mapper.Entities.Like;
+import is.hi.hbv501g.mapper.Mapper.Entities.Likes;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface LikeRepository extends JpaRepository<Like, Long> {
+public interface LikeRepository extends JpaRepository<Likes, Long> {
 
-    Like save(Like comment);
+    Likes save(Likes comment);
 
-    default void delete(Like comment) {
+    default void delete(Likes comment) {
 
     }
 
-    default List<Like> findAllForImage(long imageID) {
+    default List<Likes> findAllForImage(long imageID) {
         return null;
     }
 
-    default List<Like> findAllForUser(long userID) {
+    default List<Likes> findAllForUser(long userID) {
         return null;
     }
 
-    default Optional<Like> findById(long id) {
+    default Optional<Likes> findById(long id) {
         return null;
     }
 

@@ -7,6 +7,7 @@ import is.hi.hbv501g.mapper.Mapper.Entities.User;
 import is.hi.hbv501g.mapper.Mapper.Services.ImageService;
 import is.hi.hbv501g.mapper.Mapper.Services.LocationService;
 import is.hi.hbv501g.mapper.Mapper.Services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,8 +23,11 @@ import java.util.Date;
 
 @Controller
 public class ImageController {
+    @Autowired
     private UserService userService;
+    @Autowired
     private ImageService imageService;
+    @Autowired
     private LocationService locationService;
 
 
