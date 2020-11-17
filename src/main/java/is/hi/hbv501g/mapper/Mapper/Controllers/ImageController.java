@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.xml.crypto.Data;
+import java.io.InputStream;
+import java.nio.file.*;
+
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Date;
 
 @Controller
@@ -33,36 +36,65 @@ public class ImageController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFilePOST(@ModelAttribute(name = "image") Image image, RedirectAttributes ra, @RequestParam("fileimage") MultipartFile multipartFile)
             throws IOException {
+        String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
         /*
-        Gervigögntil að testa image upload
+      Athugar hvort vanti upplýsingar af upload form.
+       */
+
+        if(image.getImageTitle().isEmpty() || image.getDescription().isEmpty()) {
+            System.out.println("Vantar í form");
+            return "uploadFile";
+        }
+
+        if (filename.isEmpty())
+        {
+            System.out.println("vantar file");
+            return "uploadFile";
+        }
+        /*
+        Gervigögntil að testa image upload.
+        todo þarf að geta tekið inn user af uploadform og location.
 
          */
         Location testloc = locationService.save(new Location(0.999,1.444,"prufa"));
-        System.out.println(testloc.getLatitude());
         User testUser = userService.save(new User("þorri", "Már", "ths34", "passw"));
-        System.out.println(userService.findAllUsers());
 
-        String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        image.setImageTitle(filename);
-        image.setDescription("prufa");
-        image.setOwner(testUser);
-        image.setReleaseDate(new Date());
-        image.setImagelocation(testloc);
+        /*
+        Setur alla attributes á image object
 
-        System.out.println(
-                image.getImageTitle() + " " +
-                image.getDescription() + " " +
-                image.getImagelocation().getLongitude() + " " +
-                image.getImagelocation().getLatitude() + " " +
-                image.getImagelocation().getLocationName() + " " +
-                image.getReleaseDate() + " " +
-                image.getOwner().getFirstName()
-        );
+         */
+        image.setImageTitle(image.getImageTitle());
+        image.setDescription(image.getDescription());
+        image.setOwner(testUser); //todo tengja við html
+        image.setReleaseDate(new Date()); //todo hafa bara dagsetningu ekki tíma líka
+        image.setImagelocation(testloc); // //todo tengja við html
 
+
+        /*
+        Vistar mynd í gagnagrunni og á harðadisk á kerfi. Lendir undir user-photos í verkefnamöppu. Býr til möppu
+        eftir userID og undirmöppu eftir imageID.
+
+         */
         Image savedImaged = imageService.save(image);
-        String uploadDir = "user-photos/" + savedImaged.getId();
+        String uploadDir = "./user-photos/" + image.getOwner().getId() + "/"+ savedImaged.getId();
+        Path uploadPath = Paths.get(uploadDir);
+
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        try (InputStream inputStream = multipartFile.getInputStream()) {
+            Path filePath = uploadPath.resolve(filename);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ioe) {
+            throw new IOException("Could not save image file: " + image.getImageTitle(), ioe);
+        }
+
+
         return "uploadFile";
     }
+
 
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.GET)

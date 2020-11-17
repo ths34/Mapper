@@ -6,17 +6,23 @@
 </head>
 <body>
 <h2>Upload images</h2>
-<form action='#' th:action="@{/uploadFile}" th:object="${image}" method="post" enctype="multipart/form-data">
-    <div>
-            <!--  <input type="text" name="username" id="username" placeholder="Username" th:field="*{UserName}"/>
-          <input type="text" name="Longitude" id="Longitude" placeholder="Longitude" th:field= "*{Longitude}"/>
-          <input type="text" name="Latitude" id="Latitude" placeholder="Latitude" th:field= "*{Latitude}"/>
-          <input type="text" name="LocationName" id="LocationName" placeholder="Location" th:field= "*{LocationName}"/> -->
-        <input type="text" name="imageTitle" id="imageTitle" placeholder="imageTitle" th:field= "*{imageTitle}"/>
-        <label>Image: </label>
-          <input type="file" name="fileimage" id="fileimage"accept="image/png, image/jpeg" />
-        <input type="submit" value="Upload"/>
-      </div>
+<form action='#' th:action="@{/uploadFile}" th:object="${image}" method="post" enctype="multipart/form-data" name="form1">
+
+            <!--
+
+              <input type="text" name="Longitude" id="Longitude" placeholder="Longitude" th:field= "*{Longitude}"/>
+            <input type="text" name="Latitude" id="Latitude" placeholder="Latitude" th:field= "*{Latitude}"/>
+            <input type="text" name="LocationName" id="LocationName" placeholder="Location" th:field= "*{LocationName}"/>
+            <input type="text" name="username" id="username" placeholder="Username" th:field="*{userID.UserName}"/>
+
+             -->
+
+    <input type="text" name="imageTitle" id="imageTitle" placeholder="imageTitle" th:field= "*{imageTitle} "/>
+    <input type="text" name="description" id="description" placeholder="description" th:field= "*{description}"/>
+
+    <label>Image: </label>
+    <input type="file" name="fileimage" id="fileimage"accept="image/png, image/jpeg" />
+    <input type="submit" value="Upload"/>
   </form>
   </body>
   </html>
