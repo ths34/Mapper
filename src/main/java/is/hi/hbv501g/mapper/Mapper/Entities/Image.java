@@ -19,9 +19,8 @@ public class Image {
     @JoinColumn(name = "userID")
     private User userID;
 
-    @Temporal(TemporalType.DATE)
-    private Date releaseDate;
 
+    private Date releaseDate;
     private String imageTitle;
     private String description;
 
@@ -36,6 +35,10 @@ public class Image {
 
     }
 
+    @PrePersist
+    private void cDate(){
+        this.releaseDate = new Date();
+    }
     public Location getImagelocation() {
         return locationID;
     }

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -41,8 +42,9 @@ public class HomeController {
 
 
 
-    @RequestMapping(value = "/createnewuser", method = RequestMethod.POST)
-    public String createNewUser(@Validated User user, BindingResult result, Model model) {
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String createNewUser(@ModelAttribute("user") User user, BindingResult result, Model model) {
+        model.addAttribute("user", new User());
         if (result.hasErrors()) {
             return "Home";
         }
@@ -50,9 +52,9 @@ public class HomeController {
         model.addAttribute("User",userService.findAllUsers());
         return "Home";
     }
-    @RequestMapping(value = "/createnewuser", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String addNewUserForm(Model model) {
-        return "login";
+        return "register";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -62,13 +64,14 @@ public class HomeController {
         model.addAttribute("User",userService.findAllUsers());
         return "Home";
     }
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGET(User user){
+
         return "login";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginPOST(@Validated User user, BindingResult result, Model model, HttpSession session){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPOST(@ModelAttribute("user") User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
             return "login";
         }

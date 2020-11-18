@@ -10,7 +10,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String text;
-    private Date createdOn;
+    private Date releaseDate;
 
     @ManyToOne
     @JoinColumn(name="userID")
@@ -22,19 +22,21 @@ public class Comment {
 
     public Comment(String Text) {
         this.text = Text;
-        this.createdOn = new Date();
     }
 
     public Comment() {
 
     }
-
+    @PrePersist
+    private void cDate(){
+        this.releaseDate = new Date();
+    }
     public Date getDate() {
-        return createdOn;
+        return releaseDate;
     }
 
     public void changeDate(Date newDate) {
-        this.createdOn = newDate;
+        this.releaseDate = newDate;
     }
 
     public User getAuthor() {

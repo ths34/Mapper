@@ -18,9 +18,11 @@ public class Likes {
     @JoinColumn(name = "imageID")
     private Image image;
 
-    private Date createdOn;
+    private Date releaseDate;
 
-    public Likes() {
-        this.createdOn = new Date();
+    public Likes() {}
+    @PrePersist
+    private void cDate(){
+        this.releaseDate = new Date();
     }
 }

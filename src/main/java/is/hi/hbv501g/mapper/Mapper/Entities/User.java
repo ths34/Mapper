@@ -1,6 +1,7 @@
 package is.hi.hbv501g.mapper.Mapper.Entities;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,7 @@ public class User {
     private String LastName;
     private String UserName;
     private String PassWord;
+    private Date regDate;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
@@ -30,6 +32,10 @@ public class User {
         UserName = userName;
         PassWord = passWord;
 
+    }
+    @PrePersist
+    private void cDate(){
+        this.regDate = new Date();
     }
     public String getFirstName() {
         return FirstName;

@@ -67,7 +67,6 @@ public class ImageController {
         image.setImageTitle(image.getImageTitle());
         image.setDescription(image.getDescription());
         image.setOwner(testUser); //todo tengja við html
-        image.setReleaseDate(new Date()); //todo hafa bara dagsetningu ekki tíma líka
         image.setImagelocation(testloc); // //todo tengja við html
 
 
