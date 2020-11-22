@@ -30,9 +30,6 @@ public class HomeController {
     @Autowired
     private LocationService locationService;
 
-    @Autowired
-    public HomeController(UserService userService) {this.userService = userService;}
-
 
     @RequestMapping("/")
     public String Home(Model model) {
@@ -43,17 +40,16 @@ public class HomeController {
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String createNewUser(@ModelAttribute("user") User user, BindingResult result, Model model) {
-        model.addAttribute("user", new User());
+    public String createNewUser(@ModelAttribute(name = "user") User user, BindingResult result, Model model) {
+
         if (result.hasErrors()) {
             return "Home";
         }
         userService.save(user);
-        model.addAttribute("User",userService.findAllUsers());
         return "Home";
     }
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String addNewUserForm(Model model) {
+    public String addNewUserForm(User user) {
         return "register";
     }
 

@@ -16,18 +16,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     default void delete(User user) {
 
     }
- //   @Query("SELECT * FROM User")
-    default List<User> findAllUsers() {
-        return null;
-    }
+    List<User> findAll();
 
-    default User findByName(String UserName) {
-        return null;
-    }
+    User findByName(String UserName);
 
-    default Optional<User> findById(long id) {
-        return null;
-    }
-
+    Optional<User> findById(long id);
 }
 

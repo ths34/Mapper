@@ -17,18 +17,11 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     default void delete(Image image) {
 
     }
+    List<Image> findAll();
 
-    default List<Image> findAllImages() {
-        return null;
-    }
+    List<Image> findAllByUserID(long UserID);
 
-    default List<Image> findAllByUser(long UserID) {
-        return null;
-    }
+    Optional<Image> findById(long id);
 
-    default Optional<Image> findById(long id) {
-        return null;
-    }
-
-     List<Image> findByLocationID(Location location); // ætti þetta ekki að vera í location repoinu???
+    List<Image> findByLocationID(Location location); // ætti þetta ekki að vera í location repoinu???
 }

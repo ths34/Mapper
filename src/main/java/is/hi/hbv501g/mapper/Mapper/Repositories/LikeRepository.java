@@ -14,17 +14,11 @@ public interface LikeRepository extends JpaRepository<Likes, Long> {
     default void delete(Likes comment) {
 
     }
+/*
+    List<Likes> findAllByImageId(long imageID);
 
-    default List<Likes> findAllForImage(long imageID) {
-        return null;
-    }
-
-    default List<Likes> findAllForUser(long userID) {
-        return null;
-    }
-
-    default Optional<Likes> findById(long id) {
-        return null;
-    }
+    List<Likes> findAllByUserId(long userID);
+*/
+    Optional<Likes> findById(long id);
 
 }

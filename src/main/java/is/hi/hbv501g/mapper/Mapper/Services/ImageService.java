@@ -5,6 +5,7 @@ import is.hi.hbv501g.mapper.Mapper.Entities.Comment;
 import is.hi.hbv501g.mapper.Mapper.Entities.Image;
 import is.hi.hbv501g.mapper.Mapper.Entities.Location;
 import is.hi.hbv501g.mapper.Mapper.Entities.User;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 public interface ImageService {
     Image save(Image image);
-    List<Image> findAllImages();
+    List<Image> findAll();
     List<Image> findByLocationID(Location location);
     List<Image> findByUsername(String userName);
     void delete(Image image);
@@ -20,7 +21,7 @@ public interface ImageService {
     List<Comment> getComments(Integer imageID);
     Image findOne(Integer imageID);
 
-    List<Image> findAllByUser(long UserID);
+    List<Image> findAllByUserID(long UserID);
 
     Optional<Image> findById(long id);
 }

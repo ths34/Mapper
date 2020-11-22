@@ -7,22 +7,25 @@ import is.hi.hbv501g.mapper.Mapper.Entities.User;
 import is.hi.hbv501g.mapper.Mapper.Services.ImageService;
 import is.hi.hbv501g.mapper.Mapper.Services.LocationService;
 import is.hi.hbv501g.mapper.Mapper.Services.UserService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Date;
+import java.util.Optional;
 
 @Controller
 public class ImageController {
@@ -33,6 +36,17 @@ public class ImageController {
     @Autowired
     private LocationService locationService;
 
+    @RequestMapping(value = "/Image/{id}", method = RequestMethod.GET)
+    public void getImageAsByteArray(@PathVariable("id") String path,HttpServletResponse response) throws IOException {
+        FileInputStream in = new FileInputStream("./posts/"+path);
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        IOUtils.copy(in, response.getOutputStream());
+    }
+    @RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
+    public String imgView(@PathVariable("id") long id, Model model) {
+        imageService.findById(id).ifPresent(image ->model.addAttribute("image",image));
+        return "post";
+    }
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFilePOST(@ModelAttribute(name = "image") Image image, RedirectAttributes ra, @RequestParam("fileimage") MultipartFile multipartFile)
             throws IOException {
@@ -76,7 +90,7 @@ public class ImageController {
 
          */
         Image savedImaged = imageService.save(image);
-        String uploadDir = "./user-photos/" + image.getOwner().getId() + "/"+ savedImaged.getId();
+        String uploadDir = "./posts/";
         Path uploadPath = Paths.get(uploadDir);
 
         if (!Files.exists(uploadPath)) {
@@ -84,7 +98,7 @@ public class ImageController {
         }
 
         try (InputStream inputStream = multipartFile.getInputStream()) {
-            Path filePath = uploadPath.resolve(filename);
+            Path filePath = uploadPath.resolve(savedImaged.getId()+".jpg");
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ioe) {
             throw new IOException("Could not save image file: " + image.getImageTitle(), ioe);

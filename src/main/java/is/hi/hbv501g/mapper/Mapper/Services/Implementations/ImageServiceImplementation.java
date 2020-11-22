@@ -7,6 +7,7 @@ import is.hi.hbv501g.mapper.Mapper.Entities.User;
 import is.hi.hbv501g.mapper.Mapper.Repositories.ImageRepository;
 import is.hi.hbv501g.mapper.Mapper.Services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +38,8 @@ public class ImageServiceImplementation implements ImageService {
     }
 
     @Override
-    public List<Image> findAllImages() {
-       return theImageRepository.findAllImages();
+    public List<Image> findAll() {
+       return theImageRepository.findAll();
     }
 
     @Override
@@ -72,8 +73,8 @@ public class ImageServiceImplementation implements ImageService {
     }
 
     @Override
-    public List<Image> findAllByUser(long UserID) {
-        return theImageRepository.findAllByUser(UserID);
+    public List<Image> findAllByUserID(long UserID) {
+        return theImageRepository.findAllByUserID(UserID);
     }
 
     @Override
