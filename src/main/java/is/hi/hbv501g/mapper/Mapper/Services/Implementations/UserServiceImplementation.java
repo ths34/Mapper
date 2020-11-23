@@ -30,13 +30,13 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public List<User> findAllUsers() {
-        return theUserRepository.findAllUsers();
+    public List<User> findAll() {
+        return theUserRepository.findAll();
     }
 
     @Override
-    public User findByName(String UserName) {
-        return theUserRepository.findByName(UserName);
+    public User findByUserName(String UserName) {
+        return theUserRepository.findByUserName(UserName);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class UserServiceImplementation implements UserService {
     }
     @Override
     public User login(User user) {
-        User exists = findByName(user.getUserName());
+        User exists = findByUserName(user.getUserName());
         if(exists != null){
             if(exists.getPassWord().equals(user.getUserName())){
                 return user;

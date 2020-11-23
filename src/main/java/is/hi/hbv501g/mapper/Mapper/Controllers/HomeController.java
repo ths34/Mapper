@@ -33,7 +33,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String Home(Model model) {
-        model.addAttribute("Users", userService.findAllUsers());
+        model.addAttribute("Users", userService.findAll());
         return "Home";
     }
 
@@ -57,7 +57,7 @@ public class HomeController {
     public String deleteUser(@PathVariable("id") long id, Model model) {
         User user = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("No such user"));
         userService.delete(user);
-        model.addAttribute("User",userService.findAllUsers());
+        model.addAttribute("User",userService.findAll());
         return "Home";
     }
     @RequestMapping(value = "/login", method = RequestMethod.GET)

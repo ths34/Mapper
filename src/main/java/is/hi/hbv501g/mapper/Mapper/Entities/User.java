@@ -12,10 +12,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    private String FirstName;
-    private String LastName;
-    private String UserName;
-    private String PassWord;
+    private String firstName;
+    private String lastName;
+    private String userName;
+    private String passWord;
     private Date regDate;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -26,11 +26,11 @@ public class User {
 
     }
 
-    public User(String firstName, String lastName, String userName, String passWord) {
-        FirstName = firstName;
-        LastName = lastName;
-        UserName = userName;
-        PassWord = passWord;
+    public User(String FirstName, String LastName, String UserName, String PassWord) {
+        firstName = FirstName;
+        lastName = LastName;
+        userName = UserName;
+        passWord = PassWord;
 
     }
     @PrePersist
@@ -38,19 +38,19 @@ public class User {
         this.regDate = new Date();
     }
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
+    public void setFirstName(String FirstName) {
+        firstName = FirstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
-    public void setLastName(String lastName) {
-        LastName = lastName;
+    public void setLastName(String LastName) {
+        lastName = LastName;
     }
 
     public long getId() {
@@ -58,18 +58,18 @@ public class User {
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
-    public void setUserName(String userName) {
-        UserName = userName;
+    public void setUserName(String UserName) {
+        userName = UserName;
     }
 
     public String getPassWord() {
-        return PassWord;
+        return passWord;
     }
 
-    public void setPassWord(String passWord) {
-        PassWord = passWord;
+    public void setPassWord(String PassWord) {
+        passWord = PassWord;
     }
 }
