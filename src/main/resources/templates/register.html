@@ -5,11 +5,12 @@
     <title>Register</title>
 </head>
 <body>
+<h2>Sign up</h2>
 <form action="#" th:action="@{/register}" th:object="${user}" enctype="multipart/form-data"  method="post">
-    <input type="text" name="firstname" id="firstname" placeholder="First name" th:field="*{FirstName}"/>
-    <input type="text" name="lastname" id="lastname" placeholder="Last Name" th:field="*{LastName}"/>
-    <input type="text" name="username" id="username" placeholder="User Name" th:field="*{UserName}"/>
-    <input type="text" name="password" id="password" placeholder="Password" th:value="*{PassWord}"/>
+    <input type="text" name="firstname" id="firstname" placeholder="First name" th:field="*{firstName}"/>
+    <input type="text" name="lastname" id="lastname" placeholder="Last Name" th:field="*{lastName}"/>
+    <input type="text" name="username" id="username" placeholder="User Name" th:field="*{userName}"/>
+   <input type="text" name="password" id="password" placeholder="Password" th:value="*{passWord}"/>
     <input type="submit" value="Login"/>
 </form>
 </body>
