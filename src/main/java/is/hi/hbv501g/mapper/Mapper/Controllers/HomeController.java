@@ -45,7 +45,11 @@ public class HomeController {
         if (result.hasErrors()) {
             return "Home";
         }
-        userService.save(user);
+        User exists = userService.findByUserName(user.userName);
+        if(exists == null){
+            userService.save(user);
+        }
+
         return "Home";
     }
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -78,5 +82,12 @@ public class HomeController {
             return "redirect:/";
         }
         return "redirect:/";
+    }
+
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public String usersGET(Model model){
+        model.addAttribute("users", userService.findAll());
+        return "users";
     }
 }
