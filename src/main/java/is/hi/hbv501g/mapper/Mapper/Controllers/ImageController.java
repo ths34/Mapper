@@ -3,6 +3,7 @@ package is.hi.hbv501g.mapper.Mapper.Controllers;
 
 import is.hi.hbv501g.mapper.Mapper.Entities.Image;
 import is.hi.hbv501g.mapper.Mapper.Entities.Location;
+import is.hi.hbv501g.mapper.Mapper.Entities.Upload;
 import is.hi.hbv501g.mapper.Mapper.Entities.User;
 import is.hi.hbv501g.mapper.Mapper.Services.ImageService;
 import is.hi.hbv501g.mapper.Mapper.Services.LocationService;
@@ -47,48 +48,47 @@ public class ImageController {
         imageService.findById(id).ifPresent(image ->model.addAttribute("image",image));
         return "post";
     }
+
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public String uploadFilePOST(@ModelAttribute(name = "image") Image image, RedirectAttributes ra, @RequestParam("fileimage") MultipartFile multipartFile)
+    public String uploadFilePOST(@ModelAttribute(name = "image") Upload upload, RedirectAttributes ra, @RequestParam("fileimage") MultipartFile multipartFile)
             throws IOException {
+
         String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-
+          /*
+            Athugar ef user er til í db
+        */
+        if (userService.findByUserName(upload.getUserName()) == null ) {
+            System.out.println("User ekki í db");
+            return "Home";
+        }
         /*
-      Athugar hvort vanti upplýsingar af upload form.
-       */
-
-        if(image.getImageTitle().isEmpty() || image.getDescription().isEmpty()) {
+        Athugar hvort lágmarks upplýsingar vanti af upload form.
+        */
+        if(upload.imageTitle.isEmpty() || upload.description.isEmpty()) {
             System.out.println("Vantar í form");
-            return "uploadFile";
+            return "Home";
+        }
+        if (upload.LocationName.isEmpty()) {
+            if (upload.Latitude.isEmpty() || upload.Longitude.isEmpty()) {
+                System.out.println("Vantar staðsetningarupplýsingar");
+                return "Home";
+            }
         }
 
-        if (filename.isEmpty())
-        {
+        User user = userService.findByUserName(upload.getUserName());
+        Location testloc = locationService.save(new Location(Double.parseDouble(upload.getLongitude()),Double.parseDouble(upload.getLatitude()),(upload.getLocationName())));
+        Image image = new Image(testloc, upload.getImageTitle(),upload.getDescription(), user);
+
+
+        if (filename.isEmpty()) {
             System.out.println("vantar file");
-            return "uploadFile";
+            return "Home";
         }
-        /*
-        Gervigögntil að testa image upload.
-        todo þarf að geta tekið inn user af uploadform og location.
-
-         */
-        Location testloc = locationService.save(new Location(0.999,1.444,"prufa"));
-        User testUser = userService.save(new User("þorri", "Már", "ths34", "passw"));
-
-        /*
-        Setur alla attributes á image object
-
-         */
-        image.setImageTitle(image.getImageTitle());
-        image.setDescription(image.getDescription());
-        image.setOwner(testUser); //todo tengja við html
-        image.setImagelocation(testloc); // //todo tengja við html
-
-
         /*
         Vistar mynd í gagnagrunni og á harðadisk á kerfi. Lendir undir user-photos í verkefnamöppu. Býr til möppu
         eftir userID og undirmöppu eftir imageID.
+        */
 
-         */
         Image savedImaged = imageService.save(image);
         String uploadDir = "./posts/";
         Path uploadPath = Paths.get(uploadDir);
@@ -104,14 +104,12 @@ public class ImageController {
             throw new IOException("Could not save image file: " + image.getImageTitle(), ioe);
         }
 
-
-        return "uploadFile";
+        return "Home";
     }
 
 
-
     @RequestMapping(value = "/uploadFile", method = RequestMethod.GET)
-    public String uploadFileGET(Image image) {
+    public String uploadFileGET(Upload upload) {
 
         return "uploadFile";
     }

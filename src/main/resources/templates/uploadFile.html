@@ -6,24 +6,27 @@
 </head>
 <body>
 <h2>Upload images</h2>
-<form action='#' th:action="@{/uploadFile}" th:object="${image}" method="post" enctype="multipart/form-data" name="form1">
+
 
             <!--
-
+<form action='#' th:action="@{/uploadFile}" th:object="${image}" method="post" enctype="multipart/form-data" name="form1">
               <input type="text" name="Longitude" id="Longitude" placeholder="Longitude" th:field= "*{Longitude}"/>
             <input type="text" name="Latitude" id="Latitude" placeholder="Latitude" th:field= "*{Latitude}"/>
             <input type="text" name="LocationName" id="LocationName" placeholder="Location" th:field= "*{LocationName}"/>
             <input type="text" name="username" id="username" placeholder="Username" th:field="*{userID.UserName}"/>
-
-             -->
-
     <input type="text" name="imageTitle" id="imageTitle" placeholder="Image Title" th:field= "*{imageTitle} "/>
     <input type="text" name="description" id="description" placeholder="Description" th:field= "*{description}"/>
-
+             -->
+<form action='#' th:action="@{/uploadFile}" th:object="${upload}" method="post" enctype="multipart/form-data" name="form1">
+    <input type="text" name="userName" id="userName" placeholder="userName" th:field= "*{userName} "/>
+    <input type="text" name="imageTitle" id="imageTitle" placeholder="Image Title" th:field= "*{imageTitle} "/>
+    <input type="text" name="description" id="description" placeholder="Description" th:field= "*{description}"/>
+    <input type="text" name="Longitude" id="Longitude" placeholder="Longitude" th:field= "*{Longitude} "/>
+    <input type="text" name="Latitude" id="Latitude" placeholder="Latitude" th:field= "*{Latitude} "/>
+    <input type="text" name="LocationName" id="LocationName" placeholder="LocationName" th:field= "*{LocationName} "/>
     <label>Image: </label>
     <input type="file" name="fileimage" id="fileimage"accept="image/png, image/jpeg" />
     <input type="submit" value="Upload"/>
-  </form>
-  </body>
-  </html>
-
+</form>
+</body>
+</html>
