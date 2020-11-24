@@ -45,7 +45,7 @@ public class HomeController {
         if (result.hasErrors()) {
             return "Home";
         }
-        User exists = userService.findByUserName(user.userName);
+        User exists = userService.findByUserName(user.getUserName());
         if(exists == null){
             userService.save(user);
         }
@@ -64,6 +64,13 @@ public class HomeController {
         model.addAttribute("User",userService.findAll());
         return "Home";
     }
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public String usersGET(Model model){
+        model.addAttribute("users", userService.findAll());
+        return "users";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGET(User user){
 
@@ -79,15 +86,20 @@ public class HomeController {
         if(exists != null){
             
             session.setAttribute("LoggedInUser", user);
+
             return "redirect:/";
         }
         return "redirect:/";
     }
+    @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
+    public String loggedinGET(HttpSession session, Model model){
 
-
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String usersGET(Model model){
-        model.addAttribute("users", userService.findAll());
-        return "users";
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if(sessionUser  != null){
+            model.addAttribute("loggedinuser", sessionUser);
+            return "loggedInUser";
+        }
+        return "redirect:/";
     }
+
 }

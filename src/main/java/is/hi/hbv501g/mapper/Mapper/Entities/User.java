@@ -12,11 +12,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    public String firstName;
-    public String lastName;
-    public String userName;
-    public String passWord;
-    public Date regDate;
+    private String firstName;
+    private String lastName;
+    private  String userName;
+    private  String passWord;
+    private  Date regDate;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
