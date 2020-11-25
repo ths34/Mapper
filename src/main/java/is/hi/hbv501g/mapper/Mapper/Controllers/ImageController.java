@@ -48,6 +48,11 @@ public class ImageController {
         imageService.findById(id).ifPresent(image ->model.addAttribute("image",image));
         return "post";
     }
+    @RequestMapping(value = "/posts", method = RequestMethod.GET)
+    public String viewAll(Model model) {
+        model.addAttribute("posts", imageService.findAll());
+        return "posts";
+    }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFilePOST(@ModelAttribute(name = "image") Upload upload, RedirectAttributes ra, @RequestParam("fileimage") MultipartFile multipartFile)

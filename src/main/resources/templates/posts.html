@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" th:href="@{/style.css}" />
+<body>
+<div th:switch="${posts}">
+    <h2 th:case="null">No rentals yet!</h2>
+    <div th:case="*">
+        <h2>Rentals</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Movie</th>
+                <th>User</th>
+                <th>From</th>
+                <th>To</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <div th:class="post" th:each="post : ${posts}">
+                <div th:class="posti" th:style="'background:url(../Image/'+${post.id}+'.jpg);'">
+                <div  th:class="loc"  th:text="${post.locationID.locationName}"></div>
+                <div th:class="user" th:text="${post.userID}"></div>
+                </div>
+            </div>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

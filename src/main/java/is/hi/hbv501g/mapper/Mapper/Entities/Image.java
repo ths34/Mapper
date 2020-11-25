@@ -39,11 +39,11 @@ public class Image {
     private void cDate(){
         this.releaseDate = new Date();
     }
-    public Location getImagelocation() {
+    public Location getLocationID() {
         return locationID;
     }
 
-    public void setImagelocation(Location imagelocation) {
+    public void setLocationID(Location imagelocation) {
         this.locationID = imagelocation;
     }
 
@@ -71,11 +71,11 @@ public class Image {
         this.description = description;
     }
 
-    public User getOwner() {
+    public User getUserID() {
         return userID;
     }
 
-    public void setOwner(User UserID) {
+    public void setUserID(User UserID) {
         this.userID = UserID;
     }
 
