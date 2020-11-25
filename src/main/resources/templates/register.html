@@ -5,13 +5,25 @@
     <title>Register</title>
 </head>
 <body>
+<style>
+    div{
+  text-align: center;
+        }
+
+    </style>
+<div>
 <h2>Sign up</h2>
 <form action="#" th:action="@{/register}" th:object="${user}" enctype="multipart/form-data"  method="post">
     <input type="text" name="firstname" id="firstname" placeholder="First name" th:field="*{firstName}"/>
+    <br> <br>
     <input type="text" name="lastname" id="lastname" placeholder="Last Name" th:field="*{lastName}"/>
+    <br><br>
     <input type="text" name="username" id="username" placeholder="User Name" th:field="*{userName}"/>
+    <br><br>
    <input type="text" name="password" id="password" placeholder="Password" th:field="*{passWord}"/>
+    <br><br>
     <input type="submit" value="Register"/>
 </form>
+</div>
 </body>
 </html>
