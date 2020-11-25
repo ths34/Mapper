@@ -6,29 +6,19 @@
 </head>
 <link rel="stylesheet" th:href="@{/style.css}" />
 <body>
+<select th:switch="${posts}">
+    <option th:each="loc : ${locations}" th:value="${loc.id}" th:text="${loc.locationName}">Volvo</option>
+</select>
 <div th:switch="${posts}">
-    <h2 th:case="null">No rentals yet!</h2>
+    <h2 th:case="null">No uploads</h2>
     <div th:case="*">
-        <h2>Rentals</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Movie</th>
-                <th>User</th>
-                <th>From</th>
-                <th>To</th>
-
-            </tr>
-            </thead>
-            <tbody>
+        <h2>Uploads</h2>
             <div th:class="post" th:each="post : ${posts}">
                 <div th:class="posti" th:style="'background:url(../Image/'+${post.id}+'.jpg);'">
                 <div  th:class="loc"  th:text="${post.locationID.locationName}"></div>
                 <div th:class="user" th:text="${post.userID}"></div>
                 </div>
             </div>
-            </tbody>
-        </table>
     </div>
 </div>
 </body>

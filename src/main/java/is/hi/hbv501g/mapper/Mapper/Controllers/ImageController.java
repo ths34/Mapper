@@ -51,6 +51,7 @@ public class ImageController {
     @RequestMapping(value = "/posts", method = RequestMethod.GET)
     public String viewAll(Model model) {
         model.addAttribute("posts", imageService.findAll());
+        model.addAttribute("locations", locationService.findAll());
         return "posts";
     }
 

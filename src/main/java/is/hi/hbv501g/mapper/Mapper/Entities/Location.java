@@ -16,7 +16,7 @@ public class Location {
     private String LocationName;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<Image> images;// private List<Image> images = new ArrayList<>();??
+    private List<Image> images;
     public Location() {
 
     }
@@ -26,6 +26,8 @@ public class Location {
         this.Latitude = latitude;
         this.LocationName = name;
     }
+
+    public double getId(){return id;}
 
     public double getLongitude() {
         return Longitude;

@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface LocationService {
     Location save(Location prufa);
+    List<Location> findAll();
     // List<Image> findByLocation(Location location);
 }
