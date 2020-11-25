@@ -5,6 +5,12 @@
     <title>Upload image</title>
 </head>
 <body>
+<style>
+    div{
+  text-align: center;
+        }
+    </style>
+<div>
 <h2>Upload images</h2>
 
 
@@ -19,14 +25,23 @@
              -->
 <form action='#' th:action="@{/uploadFile}" th:object="${upload}" method="post" enctype="multipart/form-data" name="form1">
     <input type="text" name="userName" id="userName" placeholder="userName" th:field= "*{userName} "/>
+    <br><br>
     <input type="text" name="imageTitle" id="imageTitle" placeholder="Image Title" th:field= "*{imageTitle} "/>
+    <br><br>
     <input type="text" name="description" id="description" placeholder="Description" th:field= "*{description}"/>
+    <br><br>
     <input type="text" name="Longitude" id="Longitude" placeholder="Longitude" th:field= "*{Longitude} "/>
+    <br><br>
     <input type="text" name="Latitude" id="Latitude" placeholder="Latitude" th:field= "*{Latitude} "/>
+    <br><br>
     <input type="text" name="LocationName" id="LocationName" placeholder="LocationName" th:field= "*{LocationName} "/>
+    <br><br>
     <label>Image: </label>
     <input type="file" name="fileimage" id="fileimage"accept="image/png, image/jpeg" />
+    <br><br>
     <input type="submit" value="Upload"/>
+
 </form>
+</div>
 </body>
 </html>
