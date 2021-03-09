@@ -16,7 +16,7 @@
             <div th:class="post" th:each="post : ${posts}">
                 <div th:class="posti" th:style="'background:url(../Image/'+${post.id}+'.jpg);'">
                 <div  th:class="loc"  th:text="${post.locationID.locationName}"></div>
-                <div th:class="user" th:text="${post.userID}"></div>
+                <div th:class="user" th:text="${post.userID.userName}"></div>
                 </div>
             </div>
     </div>
