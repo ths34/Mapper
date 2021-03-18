@@ -19,7 +19,7 @@ public class UserRestController {
     private LocationService locationService;
 
     @RequestMapping("/loguser/{username}/{password}")
-    public User logInUser(@PathVariable(value = "username") String username, @PathVariable(value = "password") String password) {
+    public Object logInUser(@PathVariable(value = "username") String username, @PathVariable(value = "password") String password) {
         User tempuser = new User(null, null, username, password);
         User loggedInUser = userService.login(tempuser);
 
@@ -27,7 +27,7 @@ public class UserRestController {
             return tempuser;
         } else {
 
-            return loggedInUser;
+            return "/error";
         }
     }
 
@@ -36,7 +36,7 @@ public class UserRestController {
     * */
     @RequestMapping(value="/sign-up", method=RequestMethod.POST)
     @ResponseBody
-    public User signUpUser(@RequestBody User user) {
+    public Object signUpUser(@RequestBody User user) {
         User tempuser = new User(user.getFirstName(),user.getLastName(),user.getUserName(),user.getPassWord());
         User exists = userService.findByUserName(tempuser.getUserName());
         if(exists == null){
@@ -44,13 +44,22 @@ public class UserRestController {
 
         }
 
-        return new User();
+        return "/error";
 
     }
     @RequestMapping ("/get-all-users")
     public List<User> findAllUsers(){
         return userService.findAll();
     }
-    
-    
+
+    @RequestMapping("/logInUser")
+    public Object logInUser2(@RequestBody User user) {
+
+        User loggedInUser = userService.login(new User(user.getFirstName(),user.getLastName(),user.getUserName(),user.getPassWord()));
+
+        if (loggedInUser != null) {
+            return loggedInUser;
+        }
+        return "/error";
+    }
 }
